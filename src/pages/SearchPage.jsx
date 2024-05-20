@@ -5,6 +5,8 @@ import "../App.css";
 function SearchPage({ onPlanetNameChange, allPlanetsData }) {
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [toastVisible, setToastVisible] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
   const navigate = useNavigate();
 
   const handleInputChange = (event) => {
@@ -14,7 +16,14 @@ function SearchPage({ onPlanetNameChange, allPlanetsData }) {
   const handleSubmit = () => {
     setIsLoading(true);
     let name, planetByPopulation;
-    if (inputValue && allPlanetsData.length) {
+
+    if (!inputValue) {
+      setToastVisible(true);
+      setToastMessage("Type something to search.");
+      return;
+    }
+
+    if (!isNaN(inputValue) && allPlanetsData?.length) {
       const populationValue = Number(inputValue);
       planetByPopulation = allPlanetsData.filter((planet) => {
         const population = Number(planet.population);
@@ -32,9 +41,17 @@ function SearchPage({ onPlanetNameChange, allPlanetsData }) {
     fetch(`https://swapi.dev/api/planets/?search=${name}`)
       .then((response) => response.json())
       .then((data) => {
-        const planetData = data.results[0];
-        onPlanetNameChange(planetData);
-        navigate(`/planet/${planetData.name}`);
+        if (!data.results.length) {
+          setToastVisible(true);
+          setToastMessage("Nothing found with this search. Please try again.");
+          setTimeout(() => {
+            setToastVisible(false);
+          }, 8000);
+        } else {
+          const planetData = data.results[0];
+          onPlanetNameChange(planetData);
+          navigate(`/planet/${planetData.name}`);
+        }
       })
       .catch((error) => console.error("Error:", error))
       .finally(() => setIsLoading(false));
@@ -44,7 +61,7 @@ function SearchPage({ onPlanetNameChange, allPlanetsData }) {
     <>
       {isLoading && <div id="spinner"></div>}
       <div id="search-form">
-        <div>
+        <div id="image-container-right-side">
           <img src="./images/left-img.png" alt="" id="left-form-img" />
           <img src="./images/spaceship5.png" alt="spaceship" id="spaceship" />
         </div>
@@ -82,6 +99,9 @@ function SearchPage({ onPlanetNameChange, allPlanetsData }) {
               <p>Population</p>
             </div>
           </div>
+        </div>
+        <div className={`toast ${toastVisible ? "show" : ""}`}>
+          {toastMessage}
         </div>
       </div>
     </>
