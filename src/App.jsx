@@ -32,7 +32,6 @@ function App() {
 
     fetchAllPlanets()
       .then((data) => {
-        console.log(data);
         setAllPlanetsData(data);
       })
       .catch((error) => {

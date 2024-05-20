@@ -6,7 +6,6 @@ function PlanetCard({ planet }) {
   const navigate = useNavigate();
 
   if (!planet) {
-    console.log(navigate);
     navigate("/");
     return;
   }
