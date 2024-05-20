@@ -14,7 +14,6 @@ function SearchPage({ onPlanetNameChange, allPlanetsData }) {
   };
 
   const handleSubmit = () => {
-    setIsLoading(true);
     let name, planetByPopulation;
 
     if (!inputValue) {
@@ -37,6 +36,8 @@ function SearchPage({ onPlanetNameChange, allPlanetsData }) {
     } else {
       name = inputValue;
     }
+
+    setIsLoading(true);
 
     fetch(`https://swapi.dev/api/planets/?search=${name}`)
       .then((response) => response.json())
