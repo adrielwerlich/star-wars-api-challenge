@@ -48,7 +48,7 @@
 }
 
 #discover-text {
-  font-family: Montserrat;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
@@ -144,13 +144,27 @@
   align-items: center;
 }
 
+#planet-info-header {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  width: 50%;
+}
+
 .detail,
 .header-text {
-  font-family: Montserrat;
+  font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 14px;
   line-height: 17.07px;
   margin: 0 5px 0 10px;
+  color: #000;
+}
+
+.planet-info-text {
+  height: 26px;
+  margin: 0;
+  color: #000;
 }
 
 .uppercase {
@@ -181,8 +195,6 @@
   background-color: #909090; /* Adjust color as needed */
 }
 
-.header-text {
-}
 
 #planet-info-container {
   display: flex;
@@ -197,7 +209,7 @@
   width: 120px;
   height: 120px;
   animation: spin 2s linear infinite;
-  position: absolute;
+  position: fixed;
   top: 40%;
   left: 46%;
 }
@@ -265,7 +277,31 @@
   display: none;
 }
 
+.films-and-residents {
+  color: #000;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.planet-label {
+  margin-bottom: 0;
+}
+
 @media screen and (max-width: 992px) {
+  .toast {
+    font-size: 10px;
+  }
+
+  #spinner {
+    left: 31%;
+    top: 30%;
+  }
+
+  .planet-label {
+    margin: 0px;
+  }
   #back-button {
     display: flex;
     background: transparent;
@@ -307,11 +343,16 @@
     flex-direction: column;
     height: 166px;
     align-items: center;
+    padding: 10px 3px;
   }
 
   #planet-info-container {
-    left: 16%;
     position: relative;
+    width: 100%;
+  }
+
+  .planet-info {
+    margin-left: 113px;
   }
 
   #planet-card {
@@ -335,5 +376,9 @@
   #vertical-line,
   #footer-text {
     display: none;
+  }
+
+  #planet-info-header {
+    width: 90%;
   }
 }

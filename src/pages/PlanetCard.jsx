@@ -16,12 +16,7 @@ function PlanetCard({ planet }) {
       <div id="planet-card">
         <div id="first-row">
           <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              columnGap: "20px",
-              width: "50%",
-            }}
+            id="planet-info-header"
           >
             <img
               src={planetImages[planet.name.toLowerCase()]}
@@ -35,28 +30,28 @@ function PlanetCard({ planet }) {
                 color: "black",
               }}
             >
-              <p style={{ marginBottom: 0 }}>Planet:</p>
+              <p className="planet-label" style={{ marginBottom: 0 }}>Planet:</p>
               <h2 style={{ margin: 0 }}>{planet.name}</h2>
             </div>
           </div>
           <div id="planet-info-container">
             <div className="planet-info">
               <img src="../images/thermometer.svg" alt="Climate" />
-              <p>
+              <p className="planet-info-text">
                 <span className="detail">Climate: </span>
                 <span className="uppercase">{planet.climate}</span>
               </p>
             </div>
             <div className="planet-info">
               <img src="../images/terrain-icon.svg" alt="Terrain" />
-              <p>
+              <p className="planet-info-text">
                 <span className="detail">Terrain: </span>
                 <span className="uppercase">{planet.terrain}</span>
               </p>
             </div>
             <div className="planet-info">
               <img src="../images/people-icon.svg" alt="Population" />
-              <p>
+              <p className="planet-info-text">
                 <span className="detail">Population: </span>
                 {planet.population}
               </p>
@@ -68,7 +63,7 @@ function PlanetCard({ planet }) {
             <img src="../images/person-icon.svg" alt="Residents" />
             <span className="header-text">Residents: </span>
           </div>
-          <p style={{ padding: "0 6px" }}>
+          <p style={{ padding: "0 6px" }} className="films-and-residents">
             Residents:{" "}
             {planet.residents
               .map((url) => {
@@ -85,7 +80,7 @@ function PlanetCard({ planet }) {
               Films ({planet?.films?.length ?? 0}):{" "}
             </span>
           </div>
-          <p style={{ padding: "0 6px" }}>
+          <p style={{ padding: "0 6px" }} className="films-and-residents">
             Films:{" "}
             {planet.films
               .map((url) => {
